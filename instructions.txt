@@ -1,0 +1,41 @@
+
+I will give you the URL of a service and the goal is to build an error Log with React JS.
+
+Method: POST
+URL: https://data.my-motion.de/log/v1/search/{idCustomer}/{idUser}/-1/-1/-1/{level}/{source}/{dateFrom}/{dateTo}/{limit}/-1
+
+Body: Full text search as string
+
+idCustomer -> ID of customer
+idUser -> ID of user
+level -> Map (0: unknown, 1: critical error, 2: error, 3: warning, 4: info)
+source -> Map: (9: HOMEPAGE-TOOL, 10: SHOW-ROOOOM)
+dateFrom -> Timestamp dateFrom
+dateTo -> Timestamp dateTo
+limit -> Limit the shown results in number
+full text search -> string for free input
+
+if you do not want the filter to be set, send the value -1
+
+Example no filter:
+https://data.my-motion.de/log/v1/search/-1/-1/-1/-1/-1/-1/-1/-1/-1/-1/-1
+
+Example get the last 20 errors:
+https://data.my-motion.de/log/v1/search/-1/-1/-1/-1/-1/-1/-1/-1/-1/20/-1
+
+Example customerId filter:
+https://data.my-motion.de/log/v1/search/13/-1/-1/-1/-1/-1/-1/-1/-1/-1/-1
+
+Example date filter:
+https://data.my-motion.de/log/v1/search/-1/-1/-1/-1/-1/-1/-1/1639432100/1639472100/-1/-1
+
+So, the task is to build a webpage with a table containing the error-messages.
+Please use the tools & elements of material-ui for this: https://mui.com/components/tables/
+please only show errors from source 9 or 10
+there should be a full-text-search
+there should be a server-side filter for idCustomer, idUser, level, source, dateFrom, dateTo, limit
+
+In the end the Error-Log could look something like this. In the row you show all the columns with the infos. If you click on a row, you get the full error-message.
+
+image.png
+Please give me an info if you need further information or have any questions. :)
