@@ -23,6 +23,14 @@ html {
   background-color: black;
 }
 
+.table-filters--container {
+  display: flex;
+}
+.filter {
+  padding-bottom: 1rem;
+  padding-right: 2rem;
+}
+
 table {
   table-layout: fixed;
 }
