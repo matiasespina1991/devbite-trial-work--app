@@ -12,6 +12,10 @@ a {
   text-decoration: none;
 }
 
+p {
+  color: white;
+}
+
 * {
   box-sizing: border-box;
 }
@@ -44,6 +48,10 @@ table {
 
 .message-cell {
   width: 16rem;
+}
+
+.datum-cell {
+  width: 14rem;
 }
 
 td,
