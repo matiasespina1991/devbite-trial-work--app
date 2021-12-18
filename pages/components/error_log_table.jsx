@@ -25,7 +25,7 @@ export default function ErrorLogTable() {
         <TableContainer component={Paper}>
           <Table>
             <TableHead>
-              <TableRow>
+              <TableRow className="table-row">
                 <TableCell>Datum</TableCell>
                 <TableCell>Level</TableCell>
                 <TableCell>Quelle</TableCell>
@@ -36,15 +36,14 @@ export default function ErrorLogTable() {
                 <TableCell>Data ID</TableCell>
                 <TableCell>Protokoll ID</TableCell>
                 <TableCell>Portal</TableCell>
-                <TableCell>Kurzbeschreibung</TableCell>
+                <TableCell className="message-cell">Kurzbeschreibung</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
               { errorLogData && errorLogData.map(
                 (data,index) => {
-                  console.log(errorLogData)
                   return(
-                    <TableRow key={index}>
+                    <TableRow className="table-row" key={index}>
                       <TableCell className='datum-row' component="th" scope="row">{data.date}</TableCell>
                       <TableCell className='level-row'>{data.level}</TableCell>
                       <TableCell className='quelle-row'>{data.quelle}</TableCell>
@@ -55,7 +54,7 @@ export default function ErrorLogTable() {
                       <TableCell className='data-id-row'>{data.id_data}</TableCell>
                       <TableCell className='protokoll-id-row'>{data.id_proto}</TableCell>
                       <TableCell className='portal-row'>{data.id_portal}</TableCell>
-                      <TableCell className='Kurzbeschreibung-row'>{data.msg}</TableCell>
+                      <TableCell className='message-row'>{data.msg}</TableCell>
                     </TableRow>
                   )
                 })

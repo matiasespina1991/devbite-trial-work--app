@@ -4,6 +4,7 @@ body {
   margin: 0;
   font-family: Roboto, -apple-system, BlinkMacSystemFont, Segoe UI, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-size: 0.9rem;
 }
 
 a {
@@ -13,4 +14,44 @@ a {
 
 * {
   box-sizing: border-box;
+}
+html {
+  background-color: black;
+}
+
+table {
+  table-layout: fixed;
+}
+
+.table-row {
+  background-color: rgb(18, 18, 18);
+}
+
+.table-row th,
+.table-row td {
+  color: white;
+}
+
+.table-row th {
+  white-space: nowrap;
+}
+
+.message-row {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: scroll;
+}
+
+.message-cell {
+  width: 16rem;
+}
+
+td,
+th {
+  text-align: center !important;
+}
+
+tbody tr:hover {
+  cursor: pointer;
+  opacity: 0.9;
 }
