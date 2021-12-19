@@ -10,7 +10,7 @@ export default function TableFilters({resultsLimitFilterValue , userIdFilterValu
             <div className="filter">
                 <p>QUELLE: </p>
                 <select onChange={quelleFilterValue} defaultValue={'HOMEPAGE-TOOL'} name="quelle">
-                    <option value="-1">- ALLE -</option>
+                    <option value="-1">- Alle -</option>
                     <option value="9">HOMEPAGE-TOOL</option>
                     <option value="10">SHOW-ROOOOM</option>
                 </select>

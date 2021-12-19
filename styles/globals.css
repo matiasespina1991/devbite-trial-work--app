@@ -24,13 +24,14 @@ html {
 }
 
 main {
-  margin-top: 4rem;
+  margin-top: 6rem;
 }
 
 .table-filters--container {
   position: fixed;
   display: flex;
   background-color: black;
+  height: 6rem;
   width: 100%;
   z-index: 9;
   top: 0;
