@@ -8,16 +8,16 @@ import TableFilters from '../components/table_filters'
 
 export default function ErrorLogTable() {
 
-  const [ errorLogData , setErrorLogData ] = useState()
+  const [ data , setData ] = useState('')
   const [ resultsLimit , setResultsLimit ] = useState(20)
   const [ userIdFilter , setUserIdFilter ] = useState(-1)
-  const [ quelleFilter , setQuelleFilter ] = useState(9)
+  const [ quelleFilter , setQuelleFilter ] = useState(-1)
 
   useEffect(() => {
     const url = `https://data.my-motion.de/log/v1/search/-1/${userIdFilter ? userIdFilter : '-1'}/-1/-1/-1/-1/${quelleFilter}/-1/-1/${resultsLimit}/-1`
     axios.post(url)
       .then((res) => { 
-        setErrorLogData(res.data)
+        setData(res.data)
         console.log(res.data)
         
       })
@@ -63,7 +63,7 @@ export default function ErrorLogTable() {
               </TableRow>
             </TableHead>
             <TableBody>
-              { errorLogData && errorLogData.map(
+              { data && data.map(
                 (data,index) => {
                   return(
                     <TableRow className="table-row" key={index}>
@@ -87,10 +87,24 @@ export default function ErrorLogTable() {
                     </TableRow>
                   )
                 })
-              }         
+              }    
             </TableBody>
           </Table>
         </TableContainer>
+        {
+          data && data.length === 0 ? 
+          <div className="table-row no-results-found">
+            <p>No matches found</p>
+          </div>
+          :
+          ""
+        }
+        {
+          !data && 
+          <div className="table-row no-results-found">
+            <p>Searching...</p>
+          </div>
+        }
       </> 
     )
 }

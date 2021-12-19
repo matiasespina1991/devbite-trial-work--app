@@ -66,6 +66,15 @@ table {
   width: 14rem;
 }
 
+.no-results-found {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  height: 10rem;
+}
+
 td,
 th {
   text-align: center !important;
