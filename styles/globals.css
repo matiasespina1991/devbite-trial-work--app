@@ -23,6 +23,10 @@ html {
   background-color: black;
 }
 
+main {
+  margin-top: 4rem;
+}
+
 .table-filters--container {
   position: fixed;
   display: flex;
@@ -31,10 +35,6 @@ html {
   z-index: 9;
   top: 0;
   box-shadow: 1px 1px 7px #00000059;
-}
-.table-container {
-  position: relative;
-  top: 5rem;
 }
 .filter {
   padding-bottom: 1rem;
