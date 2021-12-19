@@ -54,11 +54,15 @@ table {
   overflow: scroll;
 }
 
-.message-cell {
+.message-table-head {
   width: 16rem;
 }
 
-.datum-cell {
+.quelle-table-head {
+  width: 12rem;
+}
+
+.datum-table-head {
   width: 14rem;
 }
 

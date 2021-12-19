@@ -1,11 +1,11 @@
-export default function TableFilters({resultsLimitValue , userIdValue}) {
+export default function TableFilters({resultsLimitFilterValue , userIdFilterValue , quelleFilterValue}) {
 
     return(
         <>
         <div className="table-filters--container">
             <div className="filter">
                 <p>Number of results: </p>
-                <select onChange={resultsLimitValue} defaultValue={'20'} name="limit-select">
+                <select onChange={resultsLimitFilterValue} defaultValue={'20'} name="limit-select">
                     <option value="5">5</option>
                     <option value="10">10</option>
                     <option value="15">15</option>
@@ -15,7 +15,14 @@ export default function TableFilters({resultsLimitValue , userIdValue}) {
             </div>
             <div className="filter">
                 <p>User ID: </p>
-                <input onChange={userIdValue} type="text" id="user-id" name="user-id" />
+                <input onChange={userIdFilterValue} type="text" id="user-id" name="user-id" />
+            </div>
+            <div className="filter">
+                <p>Quelle: </p>
+                <select onChange={quelleFilterValue} defaultValue={'HOMEPAGE-TOOL'} name="quelle">
+                    <option value="9">HOMEPAGE-TOOL</option>
+                    <option value="10">SHOW-ROOOOM</option>
+                </select>
             </div>
         </div>
         </>
