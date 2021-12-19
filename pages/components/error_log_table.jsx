@@ -45,7 +45,7 @@ export default function ErrorLogTable() {
     return (
       <>
         <TableFilters resultsLimitFilterValue={handleResultsLimitFilterValue} userIdFilterValue={handleUserIdFilterValue} quelleFilterValue={handleQuelleFilterValue} />
-        <TableContainer component={Paper}>
+        <TableContainer className="table-container" component={Paper}>
           <Table>
             <TableHead>
               <TableRow className="table-row">

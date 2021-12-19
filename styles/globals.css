@@ -24,7 +24,17 @@ html {
 }
 
 .table-filters--container {
+  position: fixed;
   display: flex;
+  background-color: black;
+  width: 100%;
+  z-index: 9;
+  top: 0;
+  box-shadow: 1px 1px 7px #00000059;
+}
+.table-container {
+  position: relative;
+  top: 5rem;
 }
 .filter {
   padding-bottom: 1rem;
