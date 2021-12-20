@@ -54,7 +54,7 @@ export default function ErrorLogTable() {
                 <TableCell className="quelle-table-head">Quelle</TableCell>
                 <TableCell className="status-table-head">Status</TableCell>
                 <TableCell className="firma-table-head">Firma</TableCell>
-                <TableCell className="user-table-head">User</TableCell>
+                <TableCell className="user-table-head">User ID</TableCell>
                 <TableCell className="fahreuz-table-head">Fahrzeug ID</TableCell>
                 <TableCell className="data-table-head">Data ID</TableCell>
                 <TableCell className="protokoll-table-head">Protokoll ID</TableCell>
