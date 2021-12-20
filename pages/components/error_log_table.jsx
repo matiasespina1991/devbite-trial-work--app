@@ -18,7 +18,6 @@ export default function ErrorLogTable() {
     axios.post(url)
       .then((res) => { 
         setData(res.data)
-        console.log(res.data)
         
       })
       .catch((err) => { 

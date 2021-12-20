@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
-import ErrorLogTable from './components/error_log_table'
+import ErrorLogTable_DataTable from './components/error_log_table--data_table'
 
 export default function Home() {
   return (
@@ -13,7 +13,7 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
-      <ErrorLogTable />
+      <ErrorLogTable_DataTable />
       </main>
 
       <footer className={styles.footer}>
@@ -22,10 +22,7 @@ export default function Home() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Powered by{' '}
-          <span className={styles.logo}>
-            <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
-          </span>
+          
         </a>
       </footer>
     </div>

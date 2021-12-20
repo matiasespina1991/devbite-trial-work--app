@@ -27,6 +27,11 @@ main {
   margin-top: 6rem;
 }
 
+.data-grid-container span,
+body .data-grid-container div {
+  color: white;
+}
+
 .table-filters--container {
   position: fixed;
   display: flex;
@@ -59,9 +64,20 @@ table {
   white-space: nowrap;
 }
 
+.MuiDataGrid-footerContainer {
+  border-top: 1px solid;
+}
+
+.MuiDataGrid-cell {
+  text-overflow: unset !important;
+  overflow: scroll !important;
+}
+
+.MuiDataGrid-cell::-webkit-scrollbar {
+  display: none;
+}
 .message-row {
   white-space: nowrap;
-  text-overflow: ellipsis;
   overflow: scroll;
 }
 
@@ -94,4 +110,9 @@ th {
 tbody tr:hover {
   cursor: pointer;
   opacity: 0.9;
+}
+
+.MuiDataGrid-row:hover {
+  cursor: pointer;
+  background-color: #ffffff1e !important;
 }
