@@ -30,7 +30,7 @@ main {
 .table-filters--container {
   position: fixed;
   display: flex;
-  background-color: black;
+  background-color: #000000ad;
   height: 6rem;
   width: 100%;
   z-index: 9;
