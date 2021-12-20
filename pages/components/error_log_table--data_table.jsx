@@ -40,6 +40,8 @@ export default function ErrorLogTable() {
       })
   }, [resultsLimit , userIdFilter , quelleFilter])
 
+  const rows = [...data]
+
   const columns = [
     { field: 'datum', headerName: 'Datum', type: 'date', width: 130 },
     { field: 'level', headerName: 'Level', type: 'number', width: 130},
@@ -53,14 +55,6 @@ export default function ErrorLogTable() {
     { field: 'id_portal', headerName: 'Portal', width: 130 },
     { field: 'msg', headerName: 'Kurzbsechreibung', sortable: false, width:500 }
   ];
-
-  const rows = [...data]
-
-  useEffect(() => {
-    const event = data
-    console.log(event)
-  }, [data])
-  
 
   const handleResultsLimitFilterValue = (e) => {
       const resultsLimitValue = e.target.value
@@ -85,13 +79,13 @@ export default function ErrorLogTable() {
           userIdFilterValue={handleUserIdFilterValue} 
           quelleFilterValue={handleQuelleFilterValue} 
         />
-        <div style={{ height: 474, width: '100%' }}>
+        <div style={{ height: 685, width: '100%' }}>
           { data &&
             <DataGrid
               className="data-grid-container"
               rows={rows}
               columns={columns}
-              pageSize={7}
+              pageSize={11}
               rowsPerPageOptions={[resultsLimit]}
             />
           }
