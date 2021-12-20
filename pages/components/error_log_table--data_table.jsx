@@ -79,7 +79,7 @@ export default function ErrorLogTable() {
           userIdFilterValue={handleUserIdFilterValue} 
           quelleFilterValue={handleQuelleFilterValue} 
         />
-        <div style={{ height: 684, width: '100%' }}>
+        <div style={{ height: 683, width: '100%' }}>
           { data &&
             <DataGrid
               className="data-grid-container"
