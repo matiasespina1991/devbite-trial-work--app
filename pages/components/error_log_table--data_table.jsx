@@ -16,6 +16,7 @@ export default function ErrorLogTable() {
     const url = `https://data.my-motion.de/log/v1/search/-1/${userIdFilter ? userIdFilter : '-1'}/-1/-1/-1/-1/${quelleFilter}/-1/-1/${resultsLimit}/-1`
     axios.post(url)
       .then((res) => { 
+        console.log(res)
         const data_json = res.data.map((res, index) => (
           {
             id: index,
@@ -43,16 +44,20 @@ export default function ErrorLogTable() {
   const rows = [...data]
 
   const columns = [
-    { field: 'datum', headerName: 'Datum', type: 'date', width: 130 },
-    { field: 'level', headerName: 'Level', type: 'number', width: 130},
-    { field: 'quelle', headerName: 'Quelle', width: 130 },
-    { field: 'status', headerName: 'Status', width: 130 },
-    { field: 'id_firma', headerName: 'Firma', width: 130 },
-    { field: 'id_user', headerName: 'User ID', width: 130 },
-    { field: 'id_car', headerName: 'Fahrzeug ID', width: 130 },
-    { field: 'id_proto', headerName: 'Data ID', width: 130 },
-    { field: 'id_proto', headerName: 'Protokoll ID', width: 130 },
-    { field: 'id_portal', headerName: 'Portal', width: 130 },
+    { 
+      field: 'datum', 
+      headerName: 'Datum', 
+      type: 'date',
+      width: 130 },
+    { field: 'level', headerName: 'Level', type: 'number', width: 110},
+    { field: 'quelle', headerName: 'Quelle', width: 110 },
+    { field: 'status', headerName: 'Status', width: 110 },
+    { field: 'id_firma', headerName: 'Firma', width: 110 },
+    { field: 'id_user', headerName: 'User ID', width: 120 },
+    { field: 'id_car', headerName: 'Fahrzeug ID', width: 150 },
+    { field: 'id_data', headerName: 'Data ID', width: 120 },
+    { field: 'id_proto', headerName: 'Protokoll ID', width: 140 },
+    { field: 'id_portal', headerName: 'Portal', width: 110 },
     { field: 'msg', headerName: 'Kurzbsechreibung', sortable: false, width:500 }
   ];
 
