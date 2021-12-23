@@ -11,7 +11,7 @@ import DesktopDatePicker from '@mui/lab/DesktopDatePicker';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import Select from '@mui/material/Select';
 
-export default function TableFilters({userIdFilterValue , quelleFilterValue , resultsLimitFilterValue , darkModeSwitch , darkModeIsOn , dateFromValue, dateFromFilter , dateToValue, dateToFilter }) {
+export default function TableFilters({userIdFilterValue , quelleFilterValue , quelleFilter , resultsLimitFilterValue , darkModeSwitch , darkModeIsOn , dateFromValue, dateFromFilter , dateToValue, dateToFilter }) {
 
     const darkModeSwitch_Label = darkModeIsOn ? "Dark Mode is ON" : "Dark Mode is OFF"
 
@@ -24,13 +24,14 @@ export default function TableFilters({userIdFilterValue , quelleFilterValue , re
             </div>
 
             <div className="filter">
-                <Box sx={{ minWidth: 150 }}>
+                <Box sx={{ minWidth: 170 }}>
                     <FormControl fullWidth>
                         <InputLabel>Quelle</InputLabel>
                         <Select
                             labelId="quelle"
                             label="Quelle"
-                            value=""
+                            defaultValue=""
+                            value={quelleFilter ? quelleFilter : ""}
                             onChange={quelleFilterValue}
                         >
                             <MenuItem value={-1}>- Alle -</MenuItem>

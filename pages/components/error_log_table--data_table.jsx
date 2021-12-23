@@ -12,12 +12,12 @@ export default function ErrorLogTable() {
   const [ darkModeIsOn , setDarkModeIsOn ] = useState(true)
   const [ resultsLimit , setResultsLimit ] = useState(20)
   const [ userIdFilter , setUserIdFilter ] = useState(-1)
-  const [ quelleFilter , setQuelleFilter ] = useState(-1)
+  const [ quelleFilter , setQuelleFilter ] = useState()
   const [ dateFromFilter , setDateFromFilter ] = useState('Sat Jan 01 2001')
   const [ dateToFilter , setDateToFilter ] = useState()
 
   useEffect(() => {
-    const url = `https://data.my-motion.de/log/v1/search/-1/${userIdFilter ? userIdFilter : '-1'}/-1/-1/-1/-1/${quelleFilter}/-1/-1/${resultsLimit}/-1`
+    const url = `https://data.my-motion.de/log/v1/search/-1/${userIdFilter ? userIdFilter : '-1'}/-1/-1/-1/-1/${quelleFilter ? quelleFilter : '-1'}/-1/-1/${resultsLimit}/-1`
     axios.post(url)
       .then((res) => {
         const data_json = res.data.map((res, index) => (
@@ -105,6 +105,7 @@ useEffect(() => {
         resultsLimitFilterValue={handleResultsLimitFilterValue} 
         userIdFilterValue={handleUserIdFilterValue} 
         quelleFilterValue={handleQuelleFilterValue} 
+        quelleFilter={quelleFilter}
         darkModeSwitch={handleDarkModeSwitch}
         darkModeIsOn={darkModeIsOn}
         dateFromValue={handleDateFromValue}
