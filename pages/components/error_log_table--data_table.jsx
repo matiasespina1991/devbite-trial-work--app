@@ -6,23 +6,26 @@ import { DataGrid } from '@material-ui/data-grid'
 import TableFilters from './table_filters'
 import DarkModeTheme from './dark_mode_theme'
 import DarkModeSwitch from './dark_mode_switch';
+import ErrorDialog from './error_dialog'
 
 
 export default function ErrorLogTable() {
 
   const [ data , setData ] = useState([])
   const [ isLoadingData , setIsLoadingData ] = useState(true)
+  const [ onError , setOnError ] = useState(false)
   const [ darkModeIsOn , setDarkModeIsOn ] = useState(true)
   const [ firmaFilter , setFirmaFilter ] = useState(-1)
   const [ userIdFilter , setUserIdFilter ] = useState(-1)
   const [ quelleFilter , setQuelleFilter ] = useState()
-  const [ dateFromFilter , setDateFromFilter ] = useState('Sat Jan 01 2001')
+  const [ levelFilter , setLevelFilter ] = useState()
+  const [ dateFromFilter , setDateFromFilter ] = useState(978318000000)
   const [ dateToFilter , setDateToFilter ] = useState()
   const [ resultsLimit , setResultsLimit ] = useState(20)
 
   useEffect(() => {
     setIsLoadingData(true)
-    const url = `https://data.my-motion.de/log/v1/search/${firmaFilter ? firmaFilter : '-1'}/${userIdFilter ? userIdFilter : '-1'}/-1/-1/-1/-1/${quelleFilter ? quelleFilter : '-1'}/-1/-1/${resultsLimit}/-1`
+    const url = `https://data.my-motion.de/log/v1/search/${firmaFilter ? firmaFilter : '-1'}/${userIdFilter ? userIdFilter : '-1'}/-1/-1/-1/${levelFilter == undefined ? '-1' : levelFilter}/${quelleFilter ? quelleFilter : '-1'}/${dateFromFilter ? dateFromFilter : '-1'}/${dateToFilter ? dateToFilter : '-1'}/${resultsLimit}/-1`
     axios.post(url)
       .then((res) => {
         const data_json = res.data.map((res, index) => (
@@ -45,15 +48,10 @@ export default function ErrorLogTable() {
         setIsLoadingData(false)
       })
       .catch((err) => { 
-        console.log(err) 
+        console.log(err)
+        setOnError(true)
       })
-  }, [firmaFilter , userIdFilter , quelleFilter , resultsLimit])
-
-  function quelleStringFormatter(quelle){
-    if (quelle.value == 9) return 'HOMEPAGE-TOOL'
-    else if (quelle.value == 10) return 'SHOW-ROOOOM'
-    else return quelle.value
-  }
+  }, [firmaFilter , userIdFilter , levelFilter , quelleFilter, dateFromFilter, dateToFilter , resultsLimit])
   
   const rows = [...data]
 
@@ -64,7 +62,7 @@ export default function ErrorLogTable() {
           return `${dateFormatted}`;
         },
       width: 210 },
-    { field: 'level', headerName: 'Level', type: 'number', width: 110},
+    { field: 'level', headerName: 'Level', valueGetter: levelStringFormatter, width: 110},
     { field: 'quelle', headerName: 'Quelle', valueGetter: quelleStringFormatter, width: 140 },
     { field: 'status', headerName: 'Status', width: 110 },
     { field: 'id_firma', headerName: 'Firma', width: 110 },
@@ -76,6 +74,20 @@ export default function ErrorLogTable() {
     { field: 'msg', headerName: 'Kurzbsechreibung', sortable: false, width:500 }
   ];
 
+  function quelleStringFormatter(quelle){
+    if (quelle.value == 9) return 'HOMEPAGE-TOOL'
+    else if (quelle.value == 10) return 'SHOW-ROOOOM'
+    else return quelle.value
+  }
+  function levelStringFormatter(level){
+    if (level.value == 0) return 'Unknown'
+    else if (level.value == 1) return 'Critical Error'
+    else if (level.value == 2) return 'Error'
+    else if (level.value == 3) return 'Warning'
+    else if (level.value == 4) return 'Info'
+    else return level.value
+  }
+  
   const handleFirmaFilterValue = (e) => {
     const firmaValue = e.target.value
     setFirmaFilter(firmaValue)
@@ -88,17 +100,21 @@ export default function ErrorLogTable() {
 
   const handleQuelleFilterValue = (e) => {
     const quelleFilterValue = e.target.value
-    console.log(e.target.value)
     setQuelleFilter(quelleFilterValue)
   }
 
+  const handleLevelFilterValue = (e) => {
+    const levelFilterValue = e.target.value
+    setLevelFilter(levelFilterValue)
+  }
+
   const handleDateFromValue = (value) => {
-    const dateFromValue = value
+    const dateFromValue = value.getTime()
     setDateFromFilter(dateFromValue)
   }
 
   const handleDateToValue = (value) => {
-    const dateToValue = value
+    const dateToValue = value.getTime()
     setDateToFilter(dateToValue)
   }
 
@@ -113,6 +129,7 @@ export default function ErrorLogTable() {
 
   return (
     <>
+
       <div className="top-pannel-container">
         <SearchBox />
         <DarkModeSwitch
@@ -121,29 +138,38 @@ export default function ErrorLogTable() {
         />
       </div>
       
-      <div style={{ height: 921, width: '100%', padding: "0 1rem" }}>
+      <div style={{ width: '100%', padding: "0 1rem" }}>
         { data &&
           <DataGrid
             className="data-grid-container"
             rows={rows}
             columns={columns}
             pageSize={15}
+            autoHeight
+            rowsPerPageOptions={[15]}
             loading={isLoadingData}
           />
         }
       </div>
+
+      { onError && <ErrorDialog /> }
+
       <TableFilters 
         resultsLimitFilterValue={handleResultsLimitFilterValue} 
         userIdFilterValue={handleUserIdFilterValue} 
         quelleFilterValue={handleQuelleFilterValue} 
         quelleFilter={quelleFilter}
+        levelFilterValue={handleLevelFilterValue} 
+        levelFilter={levelFilter}
         dateFromValue={handleDateFromValue}
         dateFromFilter={dateFromFilter}
         dateToFilter={dateToFilter}
         dateToValue={handleDateToValue}
         firmaFilterValue={handleFirmaFilterValue}
       />
+
       { darkModeIsOn && <DarkModeTheme /> }
+
     </> 
   )
 }

@@ -44,6 +44,7 @@ main {
   background: #ffffffd6;
   backdrop-filter: blur(2px);
   box-shadow: 1px 1px 7px #00000059;
+  padding: 0 1rem;
   bottom: 0;
   z-index: 9;
 }
@@ -52,7 +53,8 @@ main {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 1rem;
+  padding: 1rem 0;
+  padding-right: 0.8rem;
 }
 
 .MuiList-root {
@@ -100,6 +102,10 @@ table {
   justify-content: center;
   align-items: center;
   height: 10rem;
+}
+
+.MuiDialog-container {
+  backdrop-filter: blur(1.2px) saturate(0.4);
 }
 
 td,

@@ -69,6 +69,15 @@ export default function DarkMode() {
                 background-color: #ffffff1e !important;
             }
 
+            .MuiPaper-root {
+                background-color: #4b4848;
+                color: white;
+            }
+
+            #alert-dialog-slide-description{
+                color: white;
+            }
+
         `}</style>
     )
 }

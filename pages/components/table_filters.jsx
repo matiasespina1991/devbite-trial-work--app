@@ -8,7 +8,7 @@ import DesktopDatePicker from '@mui/lab/DesktopDatePicker';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import Select from '@mui/material/Select';
 
-export default function TableFilters({firmaFilterValue , userIdFilterValue , quelleFilterValue , quelleFilter , resultsLimitFilterValue , dateFromValue, dateFromFilter , dateToValue, dateToFilter }) {
+export default function TableFilters({firmaFilterValue , userIdFilterValue , quelleFilterValue , quelleFilter , levelFilterValue , resultsLimitFilterValue , dateFromValue, dateFromFilter , dateToValue, dateToFilter }) {
 
     return(
         <>
@@ -42,11 +42,34 @@ export default function TableFilters({firmaFilterValue , userIdFilterValue , que
             </div>
 
             <div className="filter">
+                <Box sx={{ minWidth: 170 }}>
+                    <FormControl fullWidth>
+                        <InputLabel>Level</InputLabel>
+                        <Select
+                            labelId="level"
+                            label="Level"
+                            defaultValue=""
+                            onChange={levelFilterValue}
+                        >
+                            <MenuItem value={-1}>- Alle -</MenuItem>
+                            <MenuItem value={0}>Unknown (0)</MenuItem>
+                            <MenuItem value={1}>Critical Error (1)</MenuItem>
+                            <MenuItem value={2}>Error (2)</MenuItem>
+                            <MenuItem value={3}>Warning (3)</MenuItem>
+                            <MenuItem value={4}>Info (4)</MenuItem>
+                        </Select>
+                    </FormControl>
+                </Box>
+            </div>
+
+            <div className="filter">
                 <LocalizationProvider dateAdapter={AdapterDateFns}>
                     <DesktopDatePicker
                         label="Date from"
                         inputFormat="dd.MM.yyyy"
                         mask="__.__.____"
+                        minDate={978318000000}
+                        maxDate={Date.now()}
                         value={dateFromFilter}
                         onChange={dateFromValue}
                         renderInput={(params) => <TextField {...params} />}
@@ -60,6 +83,8 @@ export default function TableFilters({firmaFilterValue , userIdFilterValue , que
                         label="Date to"
                         inputFormat="dd.MM.yyyy"
                         mask="__.__.____"
+                        minDate={dateFromFilter}
+                        maxDate={Date.now()}
                         value={dateToFilter}
                         onChange={dateToValue}
                         renderInput={(params) => <TextField {...params} />}
