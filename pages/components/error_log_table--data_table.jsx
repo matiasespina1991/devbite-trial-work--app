@@ -44,17 +44,23 @@ export default function ErrorLogTable() {
       })
   }, [resultsLimit , userIdFilter , quelleFilter])
 
+  function quelleString(quelle){
+    if (quelle.value == 9) return 'HOMEPAGE-TOOL'
+    else if (quelle.value == 10) return 'SHOW-ROOOOM'
+    else return quelle.value
+  }
+
   const rows = [...data]
 
   const columns = [
     { field: 'datum', headerName: 'Datum', type: 'date', 
-      valueFormatter: (params) => {
-        const dateFormatted = new Date(params.value).toUTCString();
+      valueFormatter: (date) => {
+        const dateFormatted = new Date(date.value).toUTCString();
           return `${dateFormatted}`;
         },
       width: 210 },
     { field: 'level', headerName: 'Level', type: 'number', width: 110},
-    { field: 'quelle', headerName: 'Quelle', width: 110 },
+    { field: 'quelle', headerName: 'Quelle', valueGetter: quelleString, width: 140 },
     { field: 'status', headerName: 'Status', width: 110 },
     { field: 'id_firma', headerName: 'Firma', width: 110 },
     { field: 'id_user', headerName: 'User ID', width: 120 },
