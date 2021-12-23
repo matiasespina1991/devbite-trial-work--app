@@ -56,6 +56,10 @@ export default function DarkMode() {
                 color: rgba(255, 255, 255, 0.3);
             }
 
+            .MuiInputBase-input {
+                color: white;
+            }
+
             .MuiInputBase-root:hover fieldset {
                 border-color: rgb(255 255 255 / 37%) !important;
             }
