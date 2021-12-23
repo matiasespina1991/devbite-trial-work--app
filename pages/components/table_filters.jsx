@@ -36,23 +36,34 @@ export default function TableFilters({userIdFilterValue , quelleFilterValue , re
                         </Select>
                     </FormControl>
                 </Box>
-                {/* <p>QUELLE: </p>
-                <select onChange={quelleFilterValue} defaultValue={'HOMEPAGE-TOOL'} name="quelle">
-                    <option value="-1">- Alle -</option>
-                    <option value="9">HOMEPAGE-TOOL</option>
-                    <option value="10">SHOW-ROOOOM</option>
-                </select> */}
             </div>
 
             <div className="filter">
-                <p>Filter number of results: </p>
+                <Box sx={{ minWidth: 150 }}>
+                    <FormControl fullWidth>
+                        <InputLabel>Filter number of results</InputLabel>
+                        <Select
+                            labelId="limit-select"
+                            label="Filter number of results"
+                            defaultValue={15}
+                            onChange={resultsLimitFilterValue}
+                        >
+                            <MenuItem value={5}>5</MenuItem>
+                            <MenuItem value={10}>10</MenuItem>
+                            <MenuItem value={15}>15</MenuItem>
+                            <MenuItem value={20}>15</MenuItem>
+                            <MenuItem value={25}>15</MenuItem>
+                        </Select>
+                    </FormControl>
+                </Box>
+                {/* <p>Filter number of results: </p>
                 <select onChange={resultsLimitFilterValue} defaultValue={'20'} name="limit-select">
                     <option value="5">5</option>
                     <option value="10">10</option>
                     <option value="15">15</option>
                     <option value="20">20</option>
                     <option value="25">25</option>
-                </select>
+                </select> */}
             </div>
 
             <FormGroup className="filter dark-mode-switch">

@@ -88,7 +88,7 @@ export default function ErrorLogTable() {
         darkModeSwitch={handleDarkModeSwitch}
         darkModeIsOn={darkModeIsOn}
       />
-      <div style={{ height: 920, width: '100%', padding: "1rem" }}>
+      <div style={{ height: 921, width: '100%', padding: "1rem" }}>
         { data &&
           <DataGrid
             className="data-grid-container"

@@ -37,6 +37,11 @@ main {
   padding: 1rem;
 }
 
+.MuiList-root {
+  display: flex !important;
+  flex-direction: column;
+}
+
 .dark-mode-switch {
   position: absolute;
   right: 0;

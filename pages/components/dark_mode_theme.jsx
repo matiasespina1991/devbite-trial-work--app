@@ -27,11 +27,6 @@ export default function DarkMode() {
                 fill: gray !important;
             }
 
-            .MuiList-root{
-                display: flex !important;
-                flex-direction: column;
-            }
-
             .table-row {
                 background-color: rgb(18, 18, 18);
             }
