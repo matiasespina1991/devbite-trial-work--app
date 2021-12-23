@@ -46,7 +46,12 @@ export default function ErrorLogTable() {
   const rows = [...data]
 
   const columns = [
-    { field: 'datum', headerName: 'Datum', type: 'date', width: 130 },
+    { field: 'datum', headerName: 'Datum', type: 'date', 
+      valueFormatter: (params) => {
+        const dateFormatted = new Date(params.value).toUTCString();
+          return `${dateFormatted}`;
+        },
+      width: 210 },
     { field: 'level', headerName: 'Level', type: 'number', width: 110},
     { field: 'quelle', headerName: 'Quelle', width: 110 },
     { field: 'status', headerName: 'Status', width: 110 },
