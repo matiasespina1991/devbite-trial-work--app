@@ -9,6 +9,7 @@ import DarkModeIsOnTheme from './dark_mode_theme'
 export default function ErrorLogTable() {
 
   const [ data , setData ] = useState([])
+  const [ isFetchingData , setIsFetchingData ] = useState(true)
   const [ darkModeIsOn , setDarkModeIsOn ] = useState(true)
   const [ firmaFilter , setFirmaFilter ] = useState(-1)
   const [ userIdFilter , setUserIdFilter ] = useState(-1)
@@ -18,6 +19,7 @@ export default function ErrorLogTable() {
   const [ resultsLimit , setResultsLimit ] = useState(20)
 
   useEffect(() => {
+    setIsFetchingData(true)
     const url = `https://data.my-motion.de/log/v1/search/${firmaFilter ? firmaFilter : '-1'}/${userIdFilter ? userIdFilter : '-1'}/-1/-1/-1/-1/${quelleFilter ? quelleFilter : '-1'}/-1/-1/${resultsLimit}/-1`
     axios.post(url)
       .then((res) => {
@@ -38,12 +40,12 @@ export default function ErrorLogTable() {
           }
         ));
         setData([...data_json]);
-
+        setIsFetchingData(false)
       })
       .catch((err) => { 
         console.log(err) 
       })
-  }, [firmaFilter, userIdFilter , quelleFilter , resultsLimit])
+  }, [firmaFilter , userIdFilter , quelleFilter , resultsLimit])
 
   function quelleStringFormatter(quelle){
     if (quelle.value == 9) return 'HOMEPAGE-TOOL'
@@ -109,6 +111,17 @@ export default function ErrorLogTable() {
 
   return (
     <>
+      <div style={{ height: 921, width: '100%', padding: "1rem" }}>
+        { data &&
+          <DataGrid
+            className="data-grid-container"
+            rows={rows}
+            columns={columns}
+            pageSize={15}
+            loading={isFetchingData}
+          />
+        }
+      </div>
       <TableFilters 
         resultsLimitFilterValue={handleResultsLimitFilterValue} 
         userIdFilterValue={handleUserIdFilterValue} 
@@ -122,16 +135,6 @@ export default function ErrorLogTable() {
         dateToValue={handleDateToValue}
         firmaFilterValue={handleFirmaFilterValue}
       />
-      <div style={{ height: 921, width: '100%', padding: "1rem" }}>
-        { data &&
-          <DataGrid
-            className="data-grid-container"
-            rows={rows}
-            columns={columns}
-            pageSize={15}
-          />
-        }
-      </div>
       { darkModeIsOn && <DarkModeIsOnTheme /> }
     </> 
   )

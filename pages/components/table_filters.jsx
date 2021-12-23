@@ -51,6 +51,7 @@ export default function TableFilters({firmaFilterValue , userIdFilterValue , que
                     <DesktopDatePicker
                         label="Date from"
                         inputFormat="dd.MM.yyyy"
+                        mask="__.__.____"
                         value={dateFromFilter}
                         onChange={dateFromValue}
                         renderInput={(params) => <TextField {...params} />}
@@ -63,6 +64,7 @@ export default function TableFilters({firmaFilterValue , userIdFilterValue , que
                     <DesktopDatePicker
                         label="Date to"
                         inputFormat="dd.MM.yyyy"
+                        mask="__.__.____"
                         value={dateToFilter}
                         onChange={dateToValue}
                         renderInput={(params) => <TextField {...params} />}
