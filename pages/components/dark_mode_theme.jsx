@@ -57,7 +57,7 @@ export default function DarkMode() {
             }
 
             .MuiInputBase-input {
-                color: white;
+                color: white !important;
             }
 
             .MuiInputBase-root:hover fieldset {
@@ -74,8 +74,8 @@ export default function DarkMode() {
             }
 
             .MuiPaper-root {
-                background-color: #4b4848;
-                color: white;
+                background-color: #4b4848 !important;
+                color: white !important;
             }
 
             #alert-dialog-slide-description{
