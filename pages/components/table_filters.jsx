@@ -1,21 +1,47 @@
-export default function TableFilters({userIdFilterValue , quelleFilterValue , resultsLimitFilterValue}) {
+import FormGroup from '@mui/material/FormGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import TextField from '@mui/material/TextField';
+import Switch from '@mui/material/Switch';
+
+import Box from '@mui/material/Box';
+import FormControl from '@mui/material/FormControl';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import Select from '@mui/material/Select';
+
+export default function TableFilters({userIdFilterValue , quelleFilterValue , resultsLimitFilterValue , darkModeSwitch , darkModeIsOn }) {
+
+    const darkModeSwitch_Label = darkModeIsOn ? "Dark Mode is ON" : "Dark Mode is OFF"
 
     return(
         <>
         <div className="table-filters--container">
 
             <div className="filter">
-                <p>USER ID: </p>
-                <input onChange={userIdFilterValue} type="text" id="user-id" name="user-id" />
+                <TextField id="user-id" onChange={userIdFilterValue} label="USER ID" variant="outlined" />
             </div>
 
             <div className="filter">
-                <p>QUELLE: </p>
+                <Box sx={{ minWidth: 120 }}>
+                    <FormControl fullWidth>
+                        <InputLabel>Quelle</InputLabel>
+                        <Select
+                            labelId="quelle"
+                            label="Quelle"
+                            onChange={quelleFilterValue}
+                        >
+                            <MenuItem value={-1}>- Alle -</MenuItem>
+                            <MenuItem value={9}>HOMEPAGE-TOOL</MenuItem>
+                            <MenuItem value={10}>SHOW-ROOOOM</MenuItem>
+                        </Select>
+                    </FormControl>
+                </Box>
+                {/* <p>QUELLE: </p>
                 <select onChange={quelleFilterValue} defaultValue={'HOMEPAGE-TOOL'} name="quelle">
                     <option value="-1">- Alle -</option>
                     <option value="9">HOMEPAGE-TOOL</option>
                     <option value="10">SHOW-ROOOOM</option>
-                </select>
+                </select> */}
             </div>
 
             <div className="filter">
@@ -28,7 +54,11 @@ export default function TableFilters({userIdFilterValue , quelleFilterValue , re
                     <option value="25">25</option>
                 </select>
             </div>
-            
+
+            <FormGroup className="filter dark-mode-switch">
+                <FormControlLabel control={<Switch inputProps={{ 'aria-label': 'controlled' }} onChange={darkModeSwitch} defaultChecked />} label={darkModeSwitch_Label} />
+            </FormGroup>
+
         </div>
         </>
     )

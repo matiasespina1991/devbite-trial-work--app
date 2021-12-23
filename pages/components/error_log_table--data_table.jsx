@@ -3,11 +3,13 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { DataGrid } from '@material-ui/data-grid'
 import TableFilters from './table_filters'
+import DarkModeIsOnTheme from './dark_mode_theme'
 
 
 export default function ErrorLogTable() {
 
   const [ data , setData ] = useState([])
+  const [ darkModeIsOn , setDarkModeIsOn ] = useState(true)
   const [ resultsLimit , setResultsLimit ] = useState(20)
   const [ userIdFilter , setUserIdFilter ] = useState(-1)
   const [ quelleFilter , setQuelleFilter ] = useState(-1)
@@ -73,25 +75,31 @@ export default function ErrorLogTable() {
     setQuelleFilter(quelleFilterValue)
   }
 
-    return (
-      <>
-        <TableFilters 
-          resultsLimitFilterValue={handleResultsLimitFilterValue} 
-          userIdFilterValue={handleUserIdFilterValue} 
-          quelleFilterValue={handleQuelleFilterValue} 
-        />
-        <div style={{ height: 683, width: '100%' }}>
-          { data &&
-            <DataGrid
-              className="data-grid-container"
-              rows={rows}
-              columns={columns}
-              pageSize={11}
-              rowsPerPageOptions={[resultsLimit]}
-            />
-          }
-          
-        </div>
-      </> 
-    )
+  const handleDarkModeSwitch = () => {
+    setDarkModeIsOn(!darkModeIsOn)
+  }
+
+  return (
+    <>
+      <TableFilters 
+        resultsLimitFilterValue={handleResultsLimitFilterValue} 
+        userIdFilterValue={handleUserIdFilterValue} 
+        quelleFilterValue={handleQuelleFilterValue} 
+        darkModeSwitch={handleDarkModeSwitch}
+        darkModeIsOn={darkModeIsOn}
+      />
+      <div style={{ height: 920, width: '100%', padding: "1rem" }}>
+        { data &&
+          <DataGrid
+            className="data-grid-container"
+            rows={rows}
+            columns={columns}
+            pageSize={15}
+            rowsPerPageOptions={[resultsLimit]}
+          />
+        }
+      </div>
+      { darkModeIsOn && <DarkModeIsOnTheme /> }
+    </> 
+  )
 }

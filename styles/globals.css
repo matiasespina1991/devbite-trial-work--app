@@ -12,60 +12,43 @@ a {
   text-decoration: none;
 }
 
-p {
-  color: white;
-}
-
 * {
   box-sizing: border-box;
 }
-html {
-  background-color: black;
-}
 
 main {
-  margin-top: 6rem;
+  margin-top: 7rem;
 }
-
-.data-grid-container span,
-body .data-grid-container div {
-  color: white;
-}
-
 .table-filters--container {
   position: fixed;
   display: flex;
-  background-color: #000000ad;
-  height: 6rem;
   width: 100%;
-  z-index: 9;
-  top: 0;
+  background: #ffffffd6;
+  backdrop-filter: blur(2px);
   box-shadow: 1px 1px 7px #00000059;
+  top: 0;
+  z-index: 9;
 }
+
 .filter {
-  padding-bottom: 1rem;
-  padding-right: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.dark-mode-switch {
+  position: absolute;
+  right: 0;
+  height: 100%;
 }
 
 table {
   table-layout: fixed;
 }
 
-.table-row {
-  background-color: rgb(18, 18, 18);
-}
-
-.table-row th,
-.table-row td {
-  color: white;
-}
-
 .table-row th {
   white-space: nowrap;
-}
-
-.MuiDataGrid-footerContainer {
-  border-top: 1px solid;
 }
 
 .MuiDataGrid-cell {
@@ -114,5 +97,5 @@ tbody tr:hover {
 
 .MuiDataGrid-row:hover {
   cursor: pointer;
-  background-color: #ffffff1e !important;
+  background-color: #00000012 !important;
 }
