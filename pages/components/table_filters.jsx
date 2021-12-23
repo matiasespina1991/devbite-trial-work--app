@@ -1,7 +1,4 @@
-import FormGroup from '@mui/material/FormGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
 import TextField from '@mui/material/TextField';
-import Switch from '@mui/material/Switch';
 import Box from '@mui/material/Box';
 import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
@@ -11,9 +8,7 @@ import DesktopDatePicker from '@mui/lab/DesktopDatePicker';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import Select from '@mui/material/Select';
 
-export default function TableFilters({firmaFilterValue , userIdFilterValue , quelleFilterValue , quelleFilter , resultsLimitFilterValue , darkModeSwitch , darkModeIsOn , dateFromValue, dateFromFilter , dateToValue, dateToFilter }) {
-
-    const darkModeSwitch_Label = darkModeIsOn ? "Dark Mode is ON" : "Dark Mode is OFF"
+export default function TableFilters({firmaFilterValue , userIdFilterValue , quelleFilterValue , quelleFilter , resultsLimitFilterValue , dateFromValue, dateFromFilter , dateToValue, dateToFilter }) {
 
     return(
         <>
@@ -91,10 +86,6 @@ export default function TableFilters({firmaFilterValue , userIdFilterValue , que
                     </FormControl>
                 </Box>
             </div>
-
-            <FormGroup className="filter dark-mode-switch">
-                <FormControlLabel control={<Switch inputProps={{ 'aria-label': 'controlled' }} onChange={darkModeSwitch} defaultChecked />} label={darkModeSwitch_Label} />
-            </FormGroup>
 
         </div>
         </>

@@ -9,6 +9,10 @@ export default function DarkMode() {
                 background-color: #121212;
             }
             
+            .search-input{
+                color: white;
+            }
+
             .MuiDataGrid-main span,
             .MuiFormControlLabel-label,
             body .data-grid-container div {

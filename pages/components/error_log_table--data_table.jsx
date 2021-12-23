@@ -1,15 +1,17 @@
 import React from 'react';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
+import SearchBox from './search_box'
 import { DataGrid } from '@material-ui/data-grid'
 import TableFilters from './table_filters'
-import DarkModeIsOnTheme from './dark_mode_theme'
+import DarkModeTheme from './dark_mode_theme'
+import DarkModeSwitch from './dark_mode_switch';
 
 
 export default function ErrorLogTable() {
 
   const [ data , setData ] = useState([])
-  const [ isFetchingData , setIsFetchingData ] = useState(true)
+  const [ isLoadingData , setIsLoadingData ] = useState(true)
   const [ darkModeIsOn , setDarkModeIsOn ] = useState(true)
   const [ firmaFilter , setFirmaFilter ] = useState(-1)
   const [ userIdFilter , setUserIdFilter ] = useState(-1)
@@ -19,7 +21,7 @@ export default function ErrorLogTable() {
   const [ resultsLimit , setResultsLimit ] = useState(20)
 
   useEffect(() => {
-    setIsFetchingData(true)
+    setIsLoadingData(true)
     const url = `https://data.my-motion.de/log/v1/search/${firmaFilter ? firmaFilter : '-1'}/${userIdFilter ? userIdFilter : '-1'}/-1/-1/-1/-1/${quelleFilter ? quelleFilter : '-1'}/-1/-1/${resultsLimit}/-1`
     axios.post(url)
       .then((res) => {
@@ -40,7 +42,7 @@ export default function ErrorLogTable() {
           }
         ));
         setData([...data_json]);
-        setIsFetchingData(false)
+        setIsLoadingData(false)
       })
       .catch((err) => { 
         console.log(err) 
@@ -111,14 +113,22 @@ export default function ErrorLogTable() {
 
   return (
     <>
-      <div style={{ height: 921, width: '100%', padding: "1rem" }}>
+      <div className="top-pannel-container">
+        <SearchBox />
+        <DarkModeSwitch
+          darkModeSwitch={handleDarkModeSwitch}
+          darkModeIsOn={darkModeIsOn} 
+        />
+      </div>
+      
+      <div style={{ height: 921, width: '100%', padding: "0 1rem" }}>
         { data &&
           <DataGrid
             className="data-grid-container"
             rows={rows}
             columns={columns}
             pageSize={15}
-            loading={isFetchingData}
+            loading={isLoadingData}
           />
         }
       </div>
@@ -127,15 +137,13 @@ export default function ErrorLogTable() {
         userIdFilterValue={handleUserIdFilterValue} 
         quelleFilterValue={handleQuelleFilterValue} 
         quelleFilter={quelleFilter}
-        darkModeSwitch={handleDarkModeSwitch}
-        darkModeIsOn={darkModeIsOn}
         dateFromValue={handleDateFromValue}
         dateFromFilter={dateFromFilter}
         dateToFilter={dateToFilter}
         dateToValue={handleDateToValue}
         firmaFilterValue={handleFirmaFilterValue}
       />
-      { darkModeIsOn && <DarkModeIsOnTheme /> }
+      { darkModeIsOn && <DarkModeTheme /> }
     </> 
   )
 }

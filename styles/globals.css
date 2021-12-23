@@ -19,6 +19,24 @@ a {
 main {
   margin-bottom: 2rem;
 }
+
+.top-pannel-container {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.search-container {
+  border-bottom: 1px solid #80808066;
+}
+
+.filter.dark-mode-switch {
+  padding-right: 2rem;
+}
+
+.dark-mode-switch span {
+  font-size: 0.8rem;
+}
+
 .table-filters--container {
   position: fixed;
   display: flex;
@@ -40,12 +58,6 @@ main {
 .MuiList-root {
   display: flex !important;
   flex-direction: column;
-}
-
-.dark-mode-switch {
-  position: absolute;
-  right: 0;
-  height: 100%;
 }
 
 table {
