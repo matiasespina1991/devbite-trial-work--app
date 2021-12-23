@@ -10,14 +10,15 @@ export default function ErrorLogTable() {
 
   const [ data , setData ] = useState([])
   const [ darkModeIsOn , setDarkModeIsOn ] = useState(true)
-  const [ resultsLimit , setResultsLimit ] = useState(20)
+  const [ firmaFilter , setFirmaFilter ] = useState(-1)
   const [ userIdFilter , setUserIdFilter ] = useState(-1)
   const [ quelleFilter , setQuelleFilter ] = useState()
   const [ dateFromFilter , setDateFromFilter ] = useState('Sat Jan 01 2001')
   const [ dateToFilter , setDateToFilter ] = useState()
+  const [ resultsLimit , setResultsLimit ] = useState(20)
 
   useEffect(() => {
-    const url = `https://data.my-motion.de/log/v1/search/-1/${userIdFilter ? userIdFilter : '-1'}/-1/-1/-1/-1/${quelleFilter ? quelleFilter : '-1'}/-1/-1/${resultsLimit}/-1`
+    const url = `https://data.my-motion.de/log/v1/search/${firmaFilter ? firmaFilter : '-1'}/${userIdFilter ? userIdFilter : '-1'}/-1/-1/-1/-1/${quelleFilter ? quelleFilter : '-1'}/-1/-1/${resultsLimit}/-1`
     axios.post(url)
       .then((res) => {
         const data_json = res.data.map((res, index) => (
@@ -42,14 +43,14 @@ export default function ErrorLogTable() {
       .catch((err) => { 
         console.log(err) 
       })
-  }, [resultsLimit , userIdFilter , quelleFilter])
+  }, [firmaFilter, userIdFilter , quelleFilter , resultsLimit])
 
-  function quelleString(quelle){
+  function quelleStringFormatter(quelle){
     if (quelle.value == 9) return 'HOMEPAGE-TOOL'
     else if (quelle.value == 10) return 'SHOW-ROOOOM'
     else return quelle.value
   }
-
+  
   const rows = [...data]
 
   const columns = [
@@ -60,7 +61,7 @@ export default function ErrorLogTable() {
         },
       width: 210 },
     { field: 'level', headerName: 'Level', type: 'number', width: 110},
-    { field: 'quelle', headerName: 'Quelle', valueGetter: quelleString, width: 140 },
+    { field: 'quelle', headerName: 'Quelle', valueGetter: quelleStringFormatter, width: 140 },
     { field: 'status', headerName: 'Status', width: 110 },
     { field: 'id_firma', headerName: 'Firma', width: 110 },
     { field: 'id_user', headerName: 'User ID', width: 120 },
@@ -71,15 +72,15 @@ export default function ErrorLogTable() {
     { field: 'msg', headerName: 'Kurzbsechreibung', sortable: false, width:500 }
   ];
 
-  const handleResultsLimitFilterValue = (e) => {
-      const resultsLimitValue = e.target.value
-      setResultsLimit(resultsLimitValue)
+  const handleFirmaFilterValue = (e) => {
+    const firmaValue = e.target.value
+    setFirmaFilter(firmaValue)
   }
 
   const handleUserIdFilterValue = (e) => {
     const userIdValue = e.target.value
     setUserIdFilter(userIdValue)
-}
+  }
 
   const handleQuelleFilterValue = (e) => {
     const quelleFilterValue = e.target.value
@@ -97,13 +98,14 @@ export default function ErrorLogTable() {
     setDateToFilter(dateToValue)
   }
 
+  const handleResultsLimitFilterValue = (e) => {
+    const resultsLimitValue = e.target.value
+    setResultsLimit(resultsLimitValue)
+}
+
   const handleDarkModeSwitch = () => {
     setDarkModeIsOn(!darkModeIsOn)
   }
-
-useEffect(() => {
-  console.log(dateFromFilter)
-}, [dateFromFilter])
 
   return (
     <>
@@ -117,6 +119,8 @@ useEffect(() => {
         dateFromValue={handleDateFromValue}
         dateFromFilter={dateFromFilter}
         dateToFilter={dateToFilter}
+        dateToValue={handleDateToValue}
+        firmaFilterValue={handleFirmaFilterValue}
       />
       <div style={{ height: 921, width: '100%', padding: "1rem" }}>
         { data &&

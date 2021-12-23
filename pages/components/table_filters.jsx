@@ -11,7 +11,7 @@ import DesktopDatePicker from '@mui/lab/DesktopDatePicker';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import Select from '@mui/material/Select';
 
-export default function TableFilters({userIdFilterValue , quelleFilterValue , quelleFilter , resultsLimitFilterValue , darkModeSwitch , darkModeIsOn , dateFromValue, dateFromFilter , dateToValue, dateToFilter }) {
+export default function TableFilters({firmaFilterValue , userIdFilterValue , quelleFilterValue , quelleFilter , resultsLimitFilterValue , darkModeSwitch , darkModeIsOn , dateFromValue, dateFromFilter , dateToValue, dateToFilter }) {
 
     const darkModeSwitch_Label = darkModeIsOn ? "Dark Mode is ON" : "Dark Mode is OFF"
 
@@ -20,7 +20,11 @@ export default function TableFilters({userIdFilterValue , quelleFilterValue , qu
         <div className="table-filters--container">
 
             <div className="filter">
-                <TextField id="user-id" onChange={userIdFilterValue} label="USER ID" variant="outlined" />
+                <TextField id="firma" onChange={firmaFilterValue} label="Firma" variant="outlined" />
+            </div>
+
+            <div className="filter">
+                <TextField id="user-id" onChange={userIdFilterValue} label="User ID" variant="outlined" />
             </div>
 
             <div className="filter">
@@ -46,7 +50,7 @@ export default function TableFilters({userIdFilterValue , quelleFilterValue , qu
                 <LocalizationProvider dateAdapter={AdapterDateFns}>
                     <DesktopDatePicker
                         label="Date from"
-                        inputFormat="MM.dd.yyyy"
+                        inputFormat="dd.MM.yyyy"
                         value={dateFromFilter}
                         onChange={dateFromValue}
                         renderInput={(params) => <TextField {...params} />}
@@ -58,7 +62,7 @@ export default function TableFilters({userIdFilterValue , quelleFilterValue , qu
                 <LocalizationProvider dateAdapter={AdapterDateFns}>
                     <DesktopDatePicker
                         label="Date to"
-                        inputFormat="MM.dd.yyyy"
+                        inputFormat="dd.MM.yyyy"
                         value={dateToFilter}
                         onChange={dateToValue}
                         renderInput={(params) => <TextField {...params} />}
