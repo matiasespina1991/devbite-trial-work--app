@@ -17,7 +17,7 @@ a {
 }
 
 main {
-  margin-top: 7rem;
+  margin-bottom: 2rem;
 }
 .table-filters--container {
   position: fixed;
@@ -26,7 +26,7 @@ main {
   background: #ffffffd6;
   backdrop-filter: blur(2px);
   box-shadow: 1px 1px 7px #00000059;
-  top: 0;
+  bottom: 0;
   z-index: 9;
 }
 
