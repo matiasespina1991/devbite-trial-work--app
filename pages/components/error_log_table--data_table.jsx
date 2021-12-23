@@ -20,7 +20,7 @@ export default function ErrorLogTable() {
   const [ quelleFilter , setQuelleFilter ] = useState()
   const [ levelFilter , setLevelFilter ] = useState()
   const [ dateFromFilter , setDateFromFilter ] = useState(978318000000)
-  const [ dateToFilter , setDateToFilter ] = useState()
+  const [ dateToFilter , setDateToFilter ] = useState(Date.now())
   const [ resultsLimit , setResultsLimit ] = useState(20)
 
   useEffect(() => {
