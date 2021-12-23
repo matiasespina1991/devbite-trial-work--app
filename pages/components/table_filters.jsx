@@ -69,7 +69,7 @@ export default function TableFilters({firmaFilterValue , userIdFilterValue , que
                         inputFormat="dd.MM.yyyy"
                         mask="__.__.____"
                         minDate={978318000000}
-                        maxDate={Date.now()}
+                        maxDate={new Date (dateToFilter)}
                         value={dateFromFilter}
                         onChange={dateFromValue}
                         renderInput={(params) => <TextField {...params} />}
@@ -83,7 +83,7 @@ export default function TableFilters({firmaFilterValue , userIdFilterValue , que
                         label="Date to"
                         inputFormat="dd.MM.yyyy"
                         mask="__.__.____"
-                        minDate={dateFromFilter}
+                        minDate={new Date (dateFromFilter)}
                         maxDate={Date.now()}
                         value={dateToFilter}
                         onChange={dateToValue}
