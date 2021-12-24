@@ -74,7 +74,7 @@ export default function DarkMode() {
             }
 
             .MuiPaper-root {
-                background-color: #4b4848 !important;
+                background-color: #383838 !important;
                 color: white !important;
             }
 

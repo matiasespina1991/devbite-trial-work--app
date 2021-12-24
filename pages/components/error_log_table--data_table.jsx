@@ -6,6 +6,7 @@ import { DataGrid } from '@material-ui/data-grid'
 import TableFilters from './table_filters'
 import DarkModeTheme from './dark_mode_theme'
 import DarkModeSwitch from './dark_mode_switch';
+import SelectedRowDialog from './selected_row_dialog'
 import ErrorDialog from './error_dialog'
 
 
@@ -15,6 +16,7 @@ export default function ErrorLogTable() {
   const [ isLoadingData , setIsLoadingData ] = useState(true)
   const [ onError , setOnError ] = useState(false)
   const [ darkModeIsOn , setDarkModeIsOn ] = useState(true)
+  const [ searchInput , setSearchInput ] = useState('')
   const [ firmaFilter , setFirmaFilter ] = useState(-1)
   const [ userIdFilter , setUserIdFilter ] = useState(-1)
   const [ quelleFilter , setQuelleFilter ] = useState()
@@ -22,6 +24,8 @@ export default function ErrorLogTable() {
   const [ dateFromFilter , setDateFromFilter ] = useState(978318000000)
   const [ dateToFilter , setDateToFilter ] = useState(Date.now())
   const [ resultsLimit , setResultsLimit ] = useState(20)
+  const [ selectedRowData , setSelectedRowData ] = useState()
+  const [ selectedRowDialogIsOpen , setSelectedRowDialogIsOpen ] = useState(false)
 
   useEffect(() => {
     setIsLoadingData(true)
@@ -44,14 +48,21 @@ export default function ErrorLogTable() {
             msg: res.msg,
           }
         ));
-        setData([...data_json]);
+        const dataFiltered = data_json.filter((data) => {
+          return data.msg.toLowerCase().includes(searchInput.toLowerCase())
+        })
+        if(dataFiltered.lenght !== 0){
+          setData([...dataFiltered]);
+        } else {
+          setData([...data_json]);
+        }
         setIsLoadingData(false)
       })
       .catch((err) => { 
         console.log(err)
         setOnError(true)
       })
-  }, [firmaFilter , userIdFilter , levelFilter , quelleFilter, dateFromFilter, dateToFilter , resultsLimit])
+  }, [searchInput , firmaFilter , userIdFilter , levelFilter , quelleFilter, dateFromFilter, dateToFilter , resultsLimit])
   
   const rows = [...data]
 
@@ -121,7 +132,17 @@ export default function ErrorLogTable() {
   const handleResultsLimitFilterValue = (e) => {
     const resultsLimitValue = e.target.value
     setResultsLimit(resultsLimitValue)
-}
+  }
+
+  const handleSearchInputOnChange = (e) => {
+    const searchInputValue = e.target.value
+    setSearchInput(searchInputValue)
+  }
+
+  const handleRowClick = (rowData) => {
+    setSelectedRowData(rowData)
+    setSelectedRowDialogIsOpen(true)
+  }
 
   const handleDarkModeSwitch = () => {
     setDarkModeIsOn(!darkModeIsOn)
@@ -129,9 +150,10 @@ export default function ErrorLogTable() {
 
   return (
     <>
-
       <div className="top-pannel-container">
-        <SearchBox />
+        <SearchBox
+          searchInputOnChange={handleSearchInputOnChange}
+        />
         <DarkModeSwitch
           darkModeSwitch={handleDarkModeSwitch}
           darkModeIsOn={darkModeIsOn} 
@@ -146,11 +168,14 @@ export default function ErrorLogTable() {
             columns={columns}
             pageSize={15}
             autoHeight
+            onRowClick={handleRowClick}
             rowsPerPageOptions={[15]}
             loading={isLoadingData}
           />
         }
       </div>
+
+      <SelectedRowDialog selectedRowData={selectedRowData} selectedRowDialogIsOpen={selectedRowDialogIsOpen} setSelectedRowDialogIsOpen={setSelectedRowDialogIsOpen} />
 
       { onError && <ErrorDialog /> }
 
