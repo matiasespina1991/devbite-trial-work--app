@@ -41,6 +41,7 @@ export default function DarkMode() {
             }
             
             .table-filters--container {
+                border-top: 1px solid rgba(255, 255, 255, 0.12);
                 background: #121212;
             }
 
