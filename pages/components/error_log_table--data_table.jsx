@@ -8,7 +8,8 @@ import DarkModeTheme from './dark_mode_theme'
 import DarkModeSwitch from './dark_mode_switch';
 import SelectedRowDialog from './selected_row_dialog'
 import ErrorDialog from './error_dialog'
-
+import moment from 'moment'
+import 'moment/locale/de'
 
 export default function ErrorLogTable() {
 
@@ -69,10 +70,11 @@ export default function ErrorLogTable() {
   const columns = [
     { field: 'datum', headerName: 'Datum', type: 'date', 
       valueFormatter: (date) => {
-        const dateFormatted = new Date(date.value).toUTCString();
+        const dateFormatted = moment(date.value).locale('de').format("dd, DD. MMMM YYYY - hh:mm:ss");
           return `${dateFormatted}`;
         },
-      width: 210 },
+      width: 230 },
+    { field: 'msg', headerName: 'Kurzbsechreibung', sortable: false, width:500 },
     { field: 'level', headerName: 'Level', valueGetter: levelStringFormatter, width: 110},
     { field: 'quelle', headerName: 'Quelle', valueGetter: quelleStringFormatter, width: 140 },
     { field: 'status', headerName: 'Status', width: 110 },
@@ -81,8 +83,7 @@ export default function ErrorLogTable() {
     { field: 'id_car', headerName: 'Fahrzeug ID', width: 150 },
     { field: 'id_data', headerName: 'Data ID', width: 120 },
     { field: 'id_proto', headerName: 'Protokoll ID', width: 140 },
-    { field: 'id_portal', headerName: 'Portal', width: 110 },
-    { field: 'msg', headerName: 'Kurzbsechreibung', sortable: false, width:500 }
+    { field: 'id_portal', headerName: 'Portal', width: 110 }
   ];
 
   function quelleStringFormatter(quelle){
