@@ -1,5 +1,5 @@
-import React from 'react';
 import axios from 'axios';
+import Head from 'next/head'
 import { useEffect, useState } from 'react';
 import SearchBox from './search_box'
 import { DataGrid } from '@material-ui/data-grid'
@@ -166,6 +166,13 @@ export default function ErrorLogTable() {
 
   return (
     <>
+      <Head>
+        <link key="preconnectToApi" rel="preconnect" href="https://data.my-motion.de" />
+        <link key="preconnectToApiDNS" rel="dns-prefetch" href="https://data.my-motion.de" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin />
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;1,100;1,300;1,400&display=swap" rel="stylesheet" />
+      </Head>
       <div className="top-pannel-container">
         <SearchBox
           searchInputOnChange={handleSearchInputOnChange}
