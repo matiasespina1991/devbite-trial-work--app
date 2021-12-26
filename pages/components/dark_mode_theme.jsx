@@ -54,7 +54,7 @@ export default function DarkMode() {
             }
 
             .MuiInputLabel-root:not(.Mui-focused){
-                color: rgba(255, 255, 255, 0.3);
+                color: rgba(255, 255, 255, 0.45);
             }
 
             .MuiInputBase-input {
