@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import PropTypes from 'prop-types';
 import Button from '@mui/material/Button';
 import { styled } from '@mui/material/styles';
@@ -9,6 +8,8 @@ import DialogActions from '@mui/material/DialogActions';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import Typography from '@mui/material/Typography';
+import moment from 'moment'
+import 'moment/locale/de'
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   '& .MuiDialogContent-root': {
@@ -61,7 +62,7 @@ export default function CustomizedDialogs({selectedRowData , selectedRowDialogIs
         open={selectedRowDialogIsOpen}
       >
         <BootstrapDialogTitle id="customized-dialog-title" onClose={handleClose}>
-          {selectedRowData && new Date (selectedRowData.row.datum).toUTCString()}
+          {selectedRowData && moment(selectedRowData.row.datum).locale('de').format("dddd, DD. MMMM YYYY - hh:mm:ss")}
         </BootstrapDialogTitle>
         <DialogContent dividers>
           <Typography style={{marginBottom : 20, fontWeight : "bold", fontSize : 16}} gutterBottom>

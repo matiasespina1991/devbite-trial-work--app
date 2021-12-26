@@ -68,9 +68,9 @@ export default function ErrorLogTable() {
   const rows = [...data]
 
   const columns = [
-    { field: 'datum', headerName: 'Datum', type: 'date', width: 200,
+    { field: 'datum', headerName: 'Datum', type: 'date', width: 205,
       valueFormatter: (date) => {
-        const dateFormatted = moment(date.value).locale('de').format("dd, DD. MMMM YYYY - hh:mm:ss");
+        const dateFormatted = moment(date.value).locale('de').format("ddd, DD. MMMM YYYY - hh:mm:ss") + " hs.";
           return `${dateFormatted}`;
         }},
     { field: 'msg', headerName: 'Kurzbsechreibung', sortable: false, width:320 },
