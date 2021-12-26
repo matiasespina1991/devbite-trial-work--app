@@ -148,6 +148,22 @@ export default function ErrorLogTable() {
     setDarkModeIsOn(!darkModeIsOn)
   }
 
+  const deutschDataGridLocaleText = {
+    noRowsLabel: 'Keine Ergebnisse gefunden.',
+    noResultsOverlayLabel: 'Keine Ergebnisse gefunden.',
+    errorOverlayDefaultLabel: 'Es ist ein Fehler aufgetreten.',
+    columnMenuLabel: 'Menü',
+    columnMenuShowColumns: 'Kolumne anzeigen',
+    columnMenuFilter: 'Filter',
+    columnMenuHideColumn: 'Ausblenden',
+    columnMenuUnsort: 'Unsortieren',
+    columnMenuSortAsc: 'Sortieren nach ASC',
+    columnMenuSortDesc: 'Sortieren nach DESC',
+    footerTotalVisibleRows: (visibleCount, totalCount) =>
+    `${visibleCount.toLocaleString()} von ${totalCount.toLocaleString()}`,
+
+  }
+
   return (
     <>
       <div className="top-pannel-container">
@@ -169,6 +185,7 @@ export default function ErrorLogTable() {
             pageSize={15}
             autoHeight
             density="compact"
+            localeText={deutschDataGridLocaleText}
             onRowClick={handleRowClick}
             rowsPerPageOptions={[15]}
             loading={isLoadingData}
