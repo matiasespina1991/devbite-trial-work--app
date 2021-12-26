@@ -168,6 +168,7 @@ export default function ErrorLogTable() {
             columns={columns}
             pageSize={15}
             autoHeight
+            density="compact"
             onRowClick={handleRowClick}
             rowsPerPageOptions={[15]}
             loading={isLoadingData}
