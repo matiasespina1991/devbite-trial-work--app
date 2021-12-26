@@ -68,22 +68,21 @@ export default function ErrorLogTable() {
   const rows = [...data]
 
   const columns = [
-    { field: 'datum', headerName: 'Datum', type: 'date', 
+    { field: 'datum', headerName: 'Datum', type: 'date', width: 230,
       valueFormatter: (date) => {
         const dateFormatted = moment(date.value).locale('de').format("dd, DD. MMMM YYYY - hh:mm:ss");
           return `${dateFormatted}`;
-        },
-      width: 230 },
-    { field: 'msg', headerName: 'Kurzbsechreibung', sortable: false, width:500 },
-    { field: 'level', headerName: 'Level', valueGetter: levelStringFormatter, width: 110},
-    { field: 'quelle', headerName: 'Quelle', valueGetter: quelleStringFormatter, width: 140 },
-    { field: 'status', headerName: 'Status', width: 110 },
-    { field: 'id_firma', headerName: 'Firma', width: 110 },
-    { field: 'id_user', headerName: 'User ID', width: 120 },
-    { field: 'id_car', headerName: 'Fahrzeug ID', width: 150 },
-    { field: 'id_data', headerName: 'Data ID', width: 120 },
-    { field: 'id_proto', headerName: 'Protokoll ID', width: 140 },
-    { field: 'id_portal', headerName: 'Portal', width: 110 }
+        }},
+    { field: 'msg', headerName: 'Kurzbsechreibung', sortable: false, width:400 },
+    { field: 'level', headerName: 'Level', headerAlign: 'right', align: 'right', valueGetter: levelStringFormatter, width: 103},
+    { field: 'quelle', headerName: 'Quelle', headerAlign: 'right', align: 'right', valueGetter: quelleStringFormatter, width: 140 },
+    { field: 'id_firma', headerName: 'Firma', headerAlign: 'right', align: 'right', width: 106 },
+    { field: 'id_user', headerName: 'User ID', headerAlign: 'right', align: 'right', width: 114 },
+    { field: 'status', headerName: 'Status', headerAlign: 'right', align: 'right', width: 111 },
+    { field: 'id_car', headerName: 'Fahrzeug ID', headerAlign: 'right', align: 'right', width: 144 },
+    { field: 'id_data', headerName: 'Data ID', headerAlign: 'right', align: 'right', width: 118 },
+    { field: 'id_proto', headerName: 'Protokoll ID', headerAlign: 'right', align: 'right', width: 140 },
+    { field: 'id_portal', headerName: 'Portal', headerAlign: 'right', align: 'right', width: 110 }
   ];
 
   function quelleStringFormatter(quelle){

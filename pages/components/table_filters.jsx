@@ -7,6 +7,7 @@ import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import DesktopDatePicker from '@mui/lab/DesktopDatePicker';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import Select from '@mui/material/Select';
+import { de } from "date-fns/locale";
 
 export default function TableFilters({firmaFilterValue , userIdFilterValue , quelleFilterValue , quelleFilter , levelFilterValue , resultsLimitFilterValue , dateFromValue, dateFromFilter , dateToValue, dateToFilter }) {
 
@@ -14,12 +15,25 @@ export default function TableFilters({firmaFilterValue , userIdFilterValue , que
         <>
         <div className="table-filters--container">
 
-            <div className="filter">
-                <TextField id="firma" onChange={firmaFilterValue} label="Firma" variant="outlined" />
-            </div>
-
-            <div className="filter">
-                <TextField id="user-id" onChange={userIdFilterValue} label="User ID" variant="outlined" />
+        <div className="filter">
+                <Box sx={{ minWidth: 170 }}>
+                    <FormControl fullWidth>
+                        <InputLabel>Level</InputLabel>
+                        <Select
+                            labelId="level"
+                            label="Level"
+                            defaultValue=""
+                            onChange={levelFilterValue}
+                        >
+                            <MenuItem value={-1}>- Alle -</MenuItem>
+                            <MenuItem value={0}>Unknown (0)</MenuItem>
+                            <MenuItem value={1}>Critical Error (1)</MenuItem>
+                            <MenuItem value={2}>Error (2)</MenuItem>
+                            <MenuItem value={3}>Warning (3)</MenuItem>
+                            <MenuItem value={4}>Info (4)</MenuItem>
+                        </Select>
+                    </FormControl>
+                </Box>
             </div>
 
             <div className="filter">
@@ -42,28 +56,15 @@ export default function TableFilters({firmaFilterValue , userIdFilterValue , que
             </div>
 
             <div className="filter">
-                <Box sx={{ minWidth: 170 }}>
-                    <FormControl fullWidth>
-                        <InputLabel>Level</InputLabel>
-                        <Select
-                            labelId="level"
-                            label="Level"
-                            defaultValue=""
-                            onChange={levelFilterValue}
-                        >
-                            <MenuItem value={-1}>- Alle -</MenuItem>
-                            <MenuItem value={0}>Unknown (0)</MenuItem>
-                            <MenuItem value={1}>Critical Error (1)</MenuItem>
-                            <MenuItem value={2}>Error (2)</MenuItem>
-                            <MenuItem value={3}>Warning (3)</MenuItem>
-                            <MenuItem value={4}>Info (4)</MenuItem>
-                        </Select>
-                    </FormControl>
-                </Box>
+                <TextField id="firma" onChange={firmaFilterValue} label="Firma" variant="outlined" />
             </div>
 
             <div className="filter">
-                <LocalizationProvider dateAdapter={AdapterDateFns}>
+                <TextField id="user-id" onChange={userIdFilterValue} label="User ID" variant="outlined" />
+            </div>
+
+            <div className="filter">
+                <LocalizationProvider locale={de} dateAdapter={AdapterDateFns}>
                     <DesktopDatePicker
                         label="Date from"
                         inputFormat="dd.MM.yyyy"
@@ -78,7 +79,7 @@ export default function TableFilters({firmaFilterValue , userIdFilterValue , que
             </div>
 
             <div className="filter">
-                <LocalizationProvider dateAdapter={AdapterDateFns}>
+                <LocalizationProvider locale={de} dateAdapter={AdapterDateFns}>
                     <DesktopDatePicker
                         label="Date to"
                         inputFormat="dd.MM.yyyy"
@@ -107,6 +108,8 @@ export default function TableFilters({firmaFilterValue , userIdFilterValue , que
                             <MenuItem value={15}>15</MenuItem>
                             <MenuItem value={20}>20</MenuItem>
                             <MenuItem value={25}>25</MenuItem>
+                            <MenuItem value={50}>50</MenuItem>
+                            <MenuItem value={100}>100</MenuItem>
                         </Select>
                     </FormControl>
                 </Box>
