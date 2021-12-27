@@ -49,20 +49,28 @@ export default function ErrorLogTable() {
             msg: res.msg,
           }
         ));
-        const dataFiltered = data_json.filter((data) => {
-          return data.msg.toLowerCase().includes(searchInput.toLowerCase())
-        })
-        if(dataFiltered.lenght !== 0){
+
+        if ( searchInput.length !== 0 ) {
+
+          const dataFiltered = data_json.filter((data) => {
+            return data.msg.toLowerCase().includes(searchInput.toLowerCase())
+          })
           setData([...dataFiltered]);
+
         } else {
+
           setData([...data_json]);
+
         }
+
         setIsLoadingData(false)
+
       })
       .catch((err) => { 
         console.log(err)
         setOnError(true)
       })
+      
   }, [searchInput , firmaFilter , userIdFilter , levelFilter , quelleFilter, dateFromFilter, dateToFilter , resultsLimit])
   
   const rows = [...data]
