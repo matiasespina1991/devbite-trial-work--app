@@ -12,7 +12,7 @@ import moment from 'moment'
 import 'moment/locale/de'
 
 export default function ErrorLogTable() {
-  
+
   const [ data , setData ] = useState([])
   const [ isLoadingData , setIsLoadingData ] = useState(true)
   const [ onError , setOnError ] = useState(false)
@@ -179,7 +179,7 @@ export default function ErrorLogTable() {
         <link key="ApiDNS_Prefetch" rel="dns-prefetch" href="https://data.my-motion.de" />
         <link key="googleAPI_Preconnect" rel="preconnect" href="https://fonts.googleapis.com" />
         <link key="fontsGstatic_Preconnect" rel="preconnect" href="https://fonts.gstatic.com" crossOrigin />
-        <link key="robotoFont_Preload" href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;1,100;1,300;1,400&display=swap" rel="preload" as="style"/>
+        <link key="robotoFont_Preload" href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;1,100;1,300;1,400&display=swap" rel="stylesheet" />
       </Head>
       <div className="top-pannel-container">
         <SearchBox
