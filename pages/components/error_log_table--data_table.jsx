@@ -12,7 +12,7 @@ import moment from 'moment'
 import 'moment/locale/de'
 
 export default function ErrorLogTable() {
-  const nada = ""
+  
   const [ data , setData ] = useState([])
   const [ isLoadingData , setIsLoadingData ] = useState(true)
   const [ onError , setOnError ] = useState(false)
