@@ -122,7 +122,6 @@ export default function ErrorLogTable() {
   const handleQuelleFilterValue = (e) => {
     const quelleFilterValue = e.target.value
     quelleFilterValue == -1 ? setResultsLimit(1000) : setResultsLimit(-1)
-    quelleFilterValue == 9 && setResultsLimit(-1)
     setQuelleFilter(quelleFilterValue)
   }
 
