@@ -52,7 +52,6 @@ export default function ErrorLogTable() {
 
         if ( searchInput.length !== 0 ) {
           const dataFiltered = data_json.filter((data) => {
-            console.log(data)
             if(data.msg){
               // This IF statements prevents from returning an error if the message box is empty
               return data.msg.toLowerCase().includes(searchInput.toLowerCase())
