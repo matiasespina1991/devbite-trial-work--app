@@ -145,7 +145,7 @@ export default function ErrorLogTable() {
     setResultsLimit(resultsLimitValue)
   }
 
-  const handleSearchInputOnChange = (e) => {
+  const handleSearchInputValue = (e) => {
     const searchInputValue = e.target.value
     setSearchInput(searchInputValue)
   }
@@ -186,7 +186,7 @@ export default function ErrorLogTable() {
       </Head>
       <div className="top-pannel-container">
         <SearchBox
-          searchInputOnChange={handleSearchInputOnChange}
+          searchInputValue={handleSearchInputValue}
         />
         <DarkModeSwitch
           darkModeSwitch={handleDarkModeSwitch}

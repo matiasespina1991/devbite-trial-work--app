@@ -44,15 +44,15 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     },
 }));
 
-export default function search_box({ searchInputOnChange }) {
+export default function search_box({ searchInputValue }) {
 
     var searchInputDelayTimer;
-    function handleSearchInput(input) {
-    clearTimeout(searchInputDelayTimer);
-    searchInputDelayTimer = setTimeout(function() {
-        searchInputOnChange(input)
-    }, 1000);
-}
+    function handleSearchInputOnChange(inputString) {
+        clearTimeout(searchInputDelayTimer);
+        searchInputDelayTimer = setTimeout(function() {
+            searchInputValue(inputString)
+        }, 1000);
+    }
 
     return(
         <div className="search-wrapper">
@@ -63,7 +63,7 @@ export default function search_box({ searchInputOnChange }) {
             <StyledInputBase
                 className="search-input"
                 placeholder="Suche…"
-                onChange={(e) => handleSearchInput(e)}
+                onChange={(e) => handleSearchInputOnChange(e)}
             />
             </Search>
         </div>
