@@ -200,7 +200,7 @@ export default function ErrorLogTable() {
             className="data-grid-container"
             rows={rows}
             columns={columns}
-            pageSize={15}
+            pageSize={25}
             autoHeight
             density="compact"
             localeText={deutschDataGridLocaleText}
