@@ -66,7 +66,7 @@ export default function TableFilters({firmaFilterValue , userIdFilterValue , que
             <div className="filter">
                 <LocalizationProvider locale={de} dateAdapter={AdapterDateFns}>
                     <DesktopDatePicker
-                        label="Date von"
+                        label="Datum von"
                         inputFormat="dd.MM.yyyy"
                         mask="__.__.____"
                         minDate={978318000000}
@@ -81,7 +81,7 @@ export default function TableFilters({firmaFilterValue , userIdFilterValue , que
             <div className="filter">
                 <LocalizationProvider locale={de} dateAdapter={AdapterDateFns}>
                     <DesktopDatePicker
-                        label="Date bis"
+                        label="Datum bis"
                         inputFormat="dd.MM.yyyy"
                         mask="__.__.____"
                         minDate={new Date (dateFromFilter)}
