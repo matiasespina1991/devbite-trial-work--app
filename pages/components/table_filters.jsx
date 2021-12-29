@@ -66,7 +66,7 @@ export default function TableFilters({firmaFilterValue , userIdFilterValue , que
             <div className="filter">
                 <LocalizationProvider locale={de} dateAdapter={AdapterDateFns}>
                     <DesktopDatePicker
-                        label="Date from"
+                        label="Date von"
                         inputFormat="dd.MM.yyyy"
                         mask="__.__.____"
                         minDate={978318000000}
@@ -81,7 +81,7 @@ export default function TableFilters({firmaFilterValue , userIdFilterValue , que
             <div className="filter">
                 <LocalizationProvider locale={de} dateAdapter={AdapterDateFns}>
                     <DesktopDatePicker
-                        label="Date to"
+                        label="Date bis"
                         inputFormat="dd.MM.yyyy"
                         mask="__.__.____"
                         minDate={new Date (dateFromFilter)}
@@ -96,10 +96,10 @@ export default function TableFilters({firmaFilterValue , userIdFilterValue , que
             <div className="filter">
                 <Box sx={{ minWidth: 150 }}>
                     <FormControl fullWidth>
-                        <InputLabel>Filter number of results</InputLabel>
+                        <InputLabel>Anzahl der Ergebnisse</InputLabel>
                         <Select
                             labelId="limit-select"
-                            label="Filter number of results"
+                            label="Anzahl der Ergebnisse"
                             defaultValue={resultsLimit && resultsLimit}
                             value={resultsLimit && resultsLimit}
                             onChange={resultsLimitFilterValue}
