@@ -9,7 +9,7 @@ import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import Select from '@mui/material/Select';
 import { de } from "date-fns/locale";
 
-export default function TableFilters({firmaFilterValue , userIdFilterValue , quelleFilterValue , quelleFilter , levelFilterValue , resultsLimitFilterValue , dateFromValue, dateFromFilter , dateToValue, dateToFilter }) {
+export default function TableFilters({firmaFilterValue , userIdFilterValue , quelleFilterValue , quelleFilter , levelFilterValue , resultsLimit , resultsLimitFilterValue , dateFromValue, dateFromFilter , dateToValue, dateToFilter }) {
 
     return(
         <>
@@ -56,11 +56,11 @@ export default function TableFilters({firmaFilterValue , userIdFilterValue , que
             </div>
 
             <div className="filter">
-                <TextField id="firma" onChange={firmaFilterValue} label="Firma" variant="outlined" />
+                <TextField id="user-id" onChange={userIdFilterValue} label="User ID" variant="outlined" />
             </div>
 
             <div className="filter">
-                <TextField id="user-id" onChange={userIdFilterValue} label="User ID" variant="outlined" />
+                <TextField id="firma" onChange={firmaFilterValue} label="Firma" variant="outlined" />
             </div>
 
             <div className="filter">
@@ -100,16 +100,16 @@ export default function TableFilters({firmaFilterValue , userIdFilterValue , que
                         <Select
                             labelId="limit-select"
                             label="Filter number of results"
-                            defaultValue={20}
+                            defaultValue={resultsLimit && resultsLimit}
+                            value={resultsLimit && resultsLimit}
                             onChange={resultsLimitFilterValue}
                         >
-                            <MenuItem value={5}>5</MenuItem>
-                            <MenuItem value={10}>10</MenuItem>
-                            <MenuItem value={15}>15</MenuItem>
-                            <MenuItem value={20}>20</MenuItem>
-                            <MenuItem value={25}>25</MenuItem>
-                            <MenuItem value={50}>50</MenuItem>
+                            { quelleFilter !== -1 && <MenuItem value={-1}>Alle anzeigen</MenuItem> }
                             <MenuItem value={100}>100</MenuItem>
+                            <MenuItem value={500}>500</MenuItem>
+                            <MenuItem value={1000}>1000</MenuItem>
+                            <MenuItem value={2500}>2500</MenuItem>
+                            <MenuItem value={5000}>5000</MenuItem>
                         </Select>
                     </FormControl>
                 </Box>

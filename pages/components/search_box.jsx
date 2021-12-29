@@ -46,6 +46,14 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 export default function search_box({ searchInputOnChange }) {
 
+    var searchInputDelayTimer;
+    function handleSearchInput(input) {
+    clearTimeout(searchInputDelayTimer);
+    searchInputDelayTimer = setTimeout(function() {
+        searchInputOnChange(input)
+    }, 1000);
+}
+
     return(
         <div className="search-wrapper">
             <Search className="search-container">
@@ -55,7 +63,7 @@ export default function search_box({ searchInputOnChange }) {
             <StyledInputBase
                 className="search-input"
                 placeholder="Suche…"
-                onChange={searchInputOnChange}
+                onChange={(e) => handleSearchInput(e)}
             />
             </Search>
         </div>

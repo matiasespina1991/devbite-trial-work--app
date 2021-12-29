@@ -20,11 +20,11 @@ export default function ErrorLogTable() {
   const [ searchInput , setSearchInput ] = useState('')
   const [ firmaFilter , setFirmaFilter ] = useState(-1)
   const [ userIdFilter , setUserIdFilter ] = useState(-1)
-  const [ quelleFilter , setQuelleFilter ] = useState()
+  const [ quelleFilter , setQuelleFilter ] = useState(-1)
   const [ levelFilter , setLevelFilter ] = useState()
   const [ dateFromFilter , setDateFromFilter ] = useState(978318000000)
   const [ dateToFilter , setDateToFilter ] = useState(Date.now())
-  const [ resultsLimit , setResultsLimit ] = useState(20)
+  const [ resultsLimit , setResultsLimit ] = useState(1000)
   const [ selectedRowData , setSelectedRowData ] = useState()
   const [ selectedRowDialogIsOpen , setSelectedRowDialogIsOpen ] = useState(false)
 
@@ -51,9 +51,11 @@ export default function ErrorLogTable() {
         ));
 
         if ( searchInput.length !== 0 ) {
-
           const dataFiltered = data_json.filter((data) => {
-            return data.msg.toLowerCase().includes(searchInput.toLowerCase())
+            if(data.msg){
+              // This IF statements prevents from returning an error if the message box is empty
+              return data.msg.toLowerCase().includes(searchInput.toLowerCase())
+            }
           })
           setData([...dataFiltered]);
 
@@ -72,25 +74,25 @@ export default function ErrorLogTable() {
       })
       
   }, [searchInput , firmaFilter , userIdFilter , levelFilter , quelleFilter, dateFromFilter, dateToFilter , resultsLimit])
-  
+
   const rows = [...data]
 
   const columns = [
-    { field: 'datum', headerName: 'Datum', type: 'date', width: 205,
+    { field: 'datum', headerName: 'Datum', type: 'date', minWidth: 145,
       valueFormatter: (date) => {
-        const dateFormatted = moment(date.value).locale('de').format("ddd, DD. MMMM YYYY - hh:mm:ss") + " hs.";
+        const dateFormatted = moment(date.value).locale('de').format("DD.MM.YYYY - hh:mm") + " Uhr.";
           return `${dateFormatted}`;
         }},
-    { field: 'msg', headerName: 'Kurzbsechreibung', sortable: false, width:320 },
-    { field: 'level', headerName: 'Level', headerAlign: 'right', align: 'right', valueGetter: levelStringFormatter, width: 98},
-    { field: 'quelle', headerName: 'Quelle', headerAlign: 'right', align: 'right', valueGetter: quelleStringFormatter, width: 110 },
-    { field: 'id_firma', headerName: 'Firma', headerAlign: 'right', align: 'right', width: 99 },
-    { field: 'id_user', headerName: 'User ID', headerAlign: 'right', align: 'right', width: 108 },
-    { field: 'status', headerName: 'Status', headerAlign: 'right', align: 'right', width: 106 },
-    { field: 'id_car', headerName: 'Fahrzeug ID', headerAlign: 'right', align: 'right', width: 130 },
-    { field: 'id_data', headerName: 'Data ID', headerAlign: 'right', align: 'right', width: 106 },
-    { field: 'id_proto', headerName: 'Protokoll ID', headerAlign: 'right', align: 'right', width: 130 },
-    { field: 'id_portal', headerName: 'Portal', headerAlign: 'right', align: 'right', width: 100 }
+    { field: 'level', headerName: 'Level', valueGetter: levelStringFormatter, minWidth: 96 },
+    { field: 'msg', headerName: 'Kurzbsechreibung', sortable: false, minWidth: 320, flex: 2 },
+    { field: 'quelle', headerName: 'Quelle', headerAlign: 'right', align: 'right', valueGetter: quelleStringFormatter, minWidth: 135, maxWidth: 190 },
+    { field: 'id_user', headerName: 'User ID', headerAlign: 'right', align: 'right', minWidth: 135 },
+    { field: 'id_firma', headerName: 'Firma', headerAlign: 'right', align: 'right', minWidth: 135 },
+    { field: 'status', hide: true, headerName: 'Status', headerAlign: 'right', align: 'right', minWidth: 106, flex: 1 },
+    { field: 'id_car', hide: true, headerName: 'Fahrzeug ID', headerAlign: 'right', align: 'right', minWidth: 130, flex: 1 },
+    { field: 'id_data', hide: true, headerName: 'Data ID', headerAlign: 'right', align: 'right', minWidth: 106, flex: 1 },
+    { field: 'id_proto', hide: true, headerName: 'Protokoll ID', headerAlign: 'right', align: 'right', minWidth: 130, flex: 1 },
+    { field: 'id_portal', hide: true, headerName: 'Portal', headerAlign: 'right', align: 'right', minWidth: 100, flex: 1 }
   ];
 
   function quelleStringFormatter(quelle){
@@ -119,6 +121,7 @@ export default function ErrorLogTable() {
 
   const handleQuelleFilterValue = (e) => {
     const quelleFilterValue = e.target.value
+    quelleFilterValue == -1 && setResultsLimit(1000)
     setQuelleFilter(quelleFilterValue)
   }
 
@@ -213,6 +216,7 @@ export default function ErrorLogTable() {
       { onError && <ErrorDialog /> }
 
       <TableFilters 
+        resultsLimit={resultsLimit}
         resultsLimitFilterValue={handleResultsLimitFilterValue} 
         userIdFilterValue={handleUserIdFilterValue} 
         quelleFilterValue={handleQuelleFilterValue} 
