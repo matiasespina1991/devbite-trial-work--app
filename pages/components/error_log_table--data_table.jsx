@@ -31,7 +31,7 @@ export default function ErrorLogTable() {
   useEffect(() => {
     setIsLoadingData(true)
     const url = `https://data.my-motion.de/log/v1/search/${firmaFilter ? firmaFilter : '-1'}/${userIdFilter ? userIdFilter : '-1'}/-1/-1/-1/${levelFilter == undefined ? '-1' : levelFilter}/${quelleFilter ? quelleFilter : '-1'}/${dateFromFilter ? dateFromFilter : '-1'}/${dateToFilter ? dateToFilter : '-1'}/${resultsLimit}/-1`
-    axios.post(url)
+    axios.post(url, searchInput)
       .then((res) => {
         const data_json = res.data.map((res, index) => (
           {
@@ -50,20 +50,7 @@ export default function ErrorLogTable() {
           }
         ));
 
-        if ( searchInput.length !== 0 ) {
-          const dataFiltered = data_json.filter((data) => {
-            if(data.msg){
-              // This IF statements prevents from returning an error if the message box is empty
-              return data.msg.toLowerCase().includes(searchInput.toLowerCase())
-            }
-          })
-          setData([...dataFiltered]);
-
-        } else {
-
-          setData([...data_json]);
-
-        }
+        setData([...data_json])
 
         setIsLoadingData(false)
 
@@ -207,6 +194,7 @@ export default function ErrorLogTable() {
             onRowClick={handleRowClick}
             rowsPerPageOptions={[15]}
             loading={isLoadingData}
+            onError={() => alert('puto')}
           />
         }
       </div>
